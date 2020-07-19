@@ -74,7 +74,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.stop_button:
                 // stop timer
+                startTime = 0L;
+                updateTime = 0L;
+                timeSwapBufferTimer = 0L;
+                timeInMilliseconds = 0L;
 
+                boolean isTimerStarted = true;
+
+                startButton.setText("Start");
+                timerTextView.setText("00:00:00");
 
 
                 break;
@@ -90,13 +98,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void run() {
 
             // create timer
+            timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
+            updateTime = timeSwapBufferTimer + timeInMilliseconds;
 
             // calculate min, sec, millisec
+            int seconds = (int)updateTime/1000;
+            int minutes = seconds/60;
+
+            seconds = seconds % 60;
+            int milliseconds = (int) (updateTime % 1000);
 
             // update textview timer
+            String timerString = " " + minutes + ":" +
+                    String.format("%02d", seconds) + ":" +
+                    String.format("%03d", milliseconds);
 
+            timerTextView.setText(timerString);
             // continue timer
-
+            timerHandler.postDelayed(this , delayTimer);
 
         }
     };
