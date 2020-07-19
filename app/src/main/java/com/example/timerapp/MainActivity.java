@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startButton.setText("Start");
                 timerTextView.setText("00:00:00");
 
+                timerHandler.removeCallbacks(updateTimer);
 
                 break;
 
