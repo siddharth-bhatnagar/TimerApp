@@ -61,6 +61,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startButton.setText("Start");
                     timeSwapBufferTimer += timeInMilliseconds;
                     timerHandler.removeCallbacks(updateTimer);
+
+                    // removes callbacks/messages from the current message queue
+
                     isTimerStarted = !isTimerStarted;
 
                 }else{
